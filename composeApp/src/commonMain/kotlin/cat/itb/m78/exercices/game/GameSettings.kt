@@ -13,7 +13,7 @@ class GameMatrix() : ViewModel()
         )
     )
 
-    val gameMatrix = List(3){ List(3) {0} }.toMutableMatrix()
+    val gameMatrix = myMatrix.toMutableMatrix()
     var playerTurn = mutableStateOf(1)
 
 
@@ -21,22 +21,14 @@ class GameMatrix() : ViewModel()
     {
         if (gameMatrix[posX][posY] == 0)
         {
-            gameMatrix[posX][posY] = when (playerTurn.value)
-            {
-                1 -> 1
-                else -> {2}
-            }
+            gameMatrix[posX][posY] = playerTurn.value
             changePlayer()
         }
     }
 
     private fun changePlayer()
     {
-        playerTurn.value = when (playerTurn.value)
-        {
-            1 -> 2
-            else -> 1
-        }
+        playerTurn.value = (playerTurn.value % 2) + 1
     }
 }
 
